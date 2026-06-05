@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import sys
 from pathlib import Path
 
 from dune_ai_monitoring.datasets.manifest import DatasetRecord, add_record_to_manifest, compute_sha256
@@ -39,6 +40,8 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
+    if argv is None:
+        argv = sys.argv[1:]
     args = build_parser().parse_args(_normalize_bbox_arg(argv))
     bbox = _parse_bbox(args.bbox)
     items = search_sentinel2_items(
