@@ -74,6 +74,7 @@ dune-pc-download \
   --max-cloud-cover 20 \
   --output data/raw/sentinel2/ainsdale_visual_2025_06.tif \
   --manifest data/metadata/manifest.csv \
+  --report data/metadata/ainsdale_visual_2025_06_report.md \
   --location-name "Ainsdale Dunes" \
   --latitude 53.602 \
   --longitude -3.055 \
@@ -84,3 +85,5 @@ dune-pc-download \
 ```
 
 Use `--asset visual` for a true-colour image, or a band key such as `B02`, `B03`, `B04`, or `B08` when you want individual spectral bands for vegetation index work.
+
+If `--report` is provided, the command also writes a human-readable Markdown summary with the selected STAC item, capture date, cloud cover, SHA-256, and approximate search-box area. The area is the bounding-box area, not a measured sand-dune area.

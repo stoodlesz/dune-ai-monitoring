@@ -6,7 +6,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from dune_ai_monitoring.datasets import load_manifest
-from dune_ai_monitoring.datasets.planetary_cli import main
+from dune_ai_monitoring.datasets.planetary_cli import approximate_bbox_area_m2, main
 
 
 class PlanetaryComputerCliTests(unittest.TestCase):
@@ -21,6 +21,7 @@ class PlanetaryComputerCliTests(unittest.TestCase):
             tmp_path = Path(tmpdir)
             output = tmp_path / "visual.tif"
             manifest = tmp_path / "manifest.csv"
+            report = tmp_path / "report.md"
 
             with (
                 patch("dune_ai_monitoring.datasets.planetary_cli.search_sentinel2_items", return_value=[fake_item]),
@@ -44,6 +45,8 @@ class PlanetaryComputerCliTests(unittest.TestCase):
                         str(output),
                         "--manifest",
                         str(manifest),
+                        "--report",
+                        str(report),
                         "--location-name",
                         "Ainsdale Dunes",
                         "--latitude",
@@ -60,6 +63,7 @@ class PlanetaryComputerCliTests(unittest.TestCase):
                 )
 
             records = load_manifest(manifest)
+            report_text = report.read_text(encoding="utf-8")
 
         self.assertEqual(exit_code, 0)
         self.assertEqual(len(records), 1)
@@ -68,6 +72,15 @@ class PlanetaryComputerCliTests(unittest.TestCase):
         self.assertEqual(records[0].bands, ("visual",))
         self.assertEqual(records[0].stage, "yellow_dune")
         self.assertIn("S2_TEST_ITEM", records[0].notes)
+        self.assertIn("# Ainsdale Dunes", report_text)
+        self.assertIn("Approximate bounding-box area", report_text)
+        self.assertIn("not the measured area of sand dunes", report_text)
+
+    def test_approximate_bbox_area_m2(self):
+        area = approximate_bbox_area_m2((-1.26, 44.55, -1.16, 44.63))
+
+        self.assertGreater(area, 70_000_000)
+        self.assertLess(area, 75_000_000)
 
 
 if __name__ == "__main__":
