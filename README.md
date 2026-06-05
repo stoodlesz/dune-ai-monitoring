@@ -165,6 +165,27 @@ python -m venv venv
 source venv/bin/activate  
 pip install -r requirements.txt
 
+For local development, install the package in editable mode:
+
+pip install -e .
+
+Run the current test suite:
+
+python -m unittest discover -s tests
+
+---
+
+## First Code Modules
+
+The `src/dune_ai_monitoring/` package contains the first reusable project code:
+
+- dataset manifest helpers for provenance and integrity metadata
+- image tiling helpers for creating model-ready patches
+- NDVI and NDWI spectral index calculations
+- metadata validation for psammosere stage labels
+
+The first dataset manifest template lives at `data/metadata/example_manifest.csv`, with notes in `docs/dataset_manifest.md`.
+
 ---
 
 ## Planned Experiments

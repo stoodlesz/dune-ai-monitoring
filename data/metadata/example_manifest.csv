@@ -1,0 +1,3 @@
+image_path,source_name,source_url,capture_date,location_name,latitude,longitude,sensor,bands,stage,label_source,label_confidence,sha256,license,notes
+data/raw/sentinel2/ainsdale_2026_05_01.tif,Sentinel-2,https://dataspace.copernicus.eu/,2026-05-01,Ainsdale Dunes,53.602,-3.055,MSI,B2;B3;B4;B8,yellow_dune,manual_review,0.85,,Copernicus terms,Example placeholder row; replace sha256 after download
+

@@ -15,6 +15,7 @@ Cleaned and prepared datasets used for training.
 
 metadata/  
 Labels, dataset descriptions, and annotation files.
+Use `metadata/example_manifest.csv` as the starting template.
 
 ---
 
@@ -95,6 +96,31 @@ Include metadata such as:
 - date
 - resolution
 - sensor type
+- source URL
+- licence or access terms
+- SHA-256 digest for integrity checking
+- label source and confidence
+
+---
+
+# Dataset Manifest
+
+Every raw image, processed image, or training tile should have one manifest row.
+
+Use:
+
+data/metadata/example_manifest.csv
+
+Each row tracks:
+
+- where the file is stored locally
+- where it came from
+- when and where it was captured
+- which sensor and bands were used
+- which psammosere stage label applies, if known
+- who or what created the label
+- how confident the label is
+- the file SHA-256 digest for provenance checks
 
 ---
 
@@ -136,6 +162,7 @@ metadata/
 
 labels.csv  
 dataset_description.md
+example_manifest.csv
 
 ---
 
