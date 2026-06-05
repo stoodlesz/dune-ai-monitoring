@@ -211,4 +211,7 @@ Possible research expansions include:
 
 ## Author
 
+Stella Williams  
+stella.williams286@gmail.com
+
 Environmental AI research project focused on ecological monitoring and secure machine learning.
