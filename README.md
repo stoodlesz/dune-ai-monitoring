@@ -190,6 +190,8 @@ After installing the project, use `dune-manifest-add` to add a downloaded image 
 
 Use `dune-pc-download` to search Microsoft Planetary Computer for Sentinel-2 L2A imagery, download a selected asset, and register it in the manifest.
 
+Common local setup, test, download, and viewing commands are listed in `docs/commands.md`.
+
 ---
 
 ## Planned Experiments
