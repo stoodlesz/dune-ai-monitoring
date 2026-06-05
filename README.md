@@ -26,57 +26,76 @@ Initial focus is on psammosere ecosystems (sand dune ecological succession). Fut
 
 ## Repository Structure
 
+```text
 dune-ai-monitoring/
+├── README.md
+├── ROADMAP.md
+├── SECURITY.md
+├── pyproject.toml
+├── requirements.txt
+├── data/
+│   ├── README.md
+│   ├── raw/
+│   ├── processed/
+│   └── metadata/
+├── docs/
+├── journal/
+├── notebooks/
+├── research/
+├── src/
+│   └── dune_ai_monitoring/
+└── tests/
+```
 
-README.md  
-requirements.txt  
+## File Breakdown
 
-configs/  
-Configuration files for model training and experiments.
+Core project files:
 
-data/  
-  raw/  
-  Original datasets (not stored in Git).
+- `README.md`: project overview, structure, and setup notes.
+- `ROADMAP.md`: research and development phases.
+- `SECURITY.md`: secure ML considerations for environmental monitoring.
+- `pyproject.toml`: Python package configuration and CLI entry points.
+- `requirements.txt`: runtime dependencies.
 
-  processed/  
-  Cleaned datasets prepared for training.
+Source code:
 
-  metadata/  
-  Dataset descriptions and labels.
+- `src/dune_ai_monitoring/datasets/manifest.py`: dataset manifest records, CSV loading/writing, validation, and SHA-256 hashing.
+- `src/dune_ai_monitoring/datasets/cli.py`: `dune-manifest-add` command for registering a local image in a manifest.
+- `src/dune_ai_monitoring/datasets/planetary.py`: Microsoft Planetary Computer STAC search, asset signing, and download helpers.
+- `src/dune_ai_monitoring/datasets/planetary_cli.py`: `dune-pc-download` command for downloading Sentinel-2 imagery and writing manifest/report outputs.
+- `src/dune_ai_monitoring/preprocessing/image_tiles.py`: image tiling helpers for model-ready patches.
+- `src/dune_ai_monitoring/preprocessing/indices.py`: NDVI, NDWI, and normalized-difference calculations.
+- `src/dune_ai_monitoring/preprocessing/metadata.py`: psammosere stage labels and label validation.
 
-  README.md  
-  Instructions for downloading datasets.
+Data organisation:
 
-notebooks/  
-Exploratory notebooks for data analysis and visualisation.
+- `data/raw/`: local raw imagery downloads. This folder is intentionally not used for committed satellite image files.
+- `data/processed/`: future cleaned, tiled, or model-ready outputs.
+- `data/metadata/example_manifest.csv`: blank/example manifest format.
+- `data/metadata/dune_pilat_manifest.csv`: first Dune du Pilat Sentinel-2 metadata record.
+- `data/metadata/dune_pilat_report.md`: readable report for the Dune du Pilat image.
+- `data/README.md`: dataset source and storage guidance.
 
-src/
+Documentation and notes:
 
-  preprocessing/  
-  Image preparation and dataset pipelines.
+- `docs/commands.md`: common setup, test, download, and viewing commands.
+- `docs/dataset_manifest.md`: explanation of the manifest format and downloader commands.
+- `journal/2026-06-05.md`: project diary entry tracking early progress.
+- `research/literature.md`: reading list and background sources.
 
-  models/  
-  Neural network architectures.
+Exploration and experiments:
 
-  training/  
-  Training loops and optimisation scripts.
+- `01_dune_imagery_exploration.ipynb`: initial exploration notebook.
+- `notebooks/`: notebook workspace for future analysis.
+- `experiments/`: placeholder for future modelling experiments.
 
-  evaluation/  
-  Model evaluation and metrics.
+Tests:
 
-  utils/  
-  Shared utilities.
-
-experiments/
-
-  psammosere-classifier/  
-  Models classifying dune succession stages.
-
-  temporal-analysis/  
-  Time-series change detection.
-
-docs/  
-Research notes and documentation.
+- `tests/test_manifest.py`: manifest record and validation tests.
+- `tests/test_manifest_cli.py`: local manifest command tests.
+- `tests/test_planetary.py`: Planetary Computer STAC helper tests.
+- `tests/test_planetary_cli.py`: Sentinel-2 downloader command tests.
+- `tests/test_preprocessing.py`: image tiling, spectral index, and label validation tests.
 
 ---
 
