@@ -188,6 +188,8 @@ The first dataset manifest template lives at `data/metadata/example_manifest.csv
 
 After installing the project, use `dune-manifest-add` to add a downloaded image to `data/metadata/manifest.csv` and compute its SHA-256 provenance hash automatically.
 
+Use `dune-pc-download` to search Microsoft Planetary Computer for Sentinel-2 L2A imagery, download a selected asset, and register it in the manifest.
+
 ---
 
 ## Planned Experiments

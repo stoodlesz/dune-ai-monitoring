@@ -59,3 +59,28 @@ dune-manifest-add \
 ```
 
 The command computes the file SHA-256 automatically and writes it into the manifest row.
+
+## Downloading From Planetary Computer
+
+The project also includes `dune-pc-download`, which searches Microsoft Planetary Computer's STAC API for Sentinel-2 L2A imagery, picks the least-cloudy matching item, downloads one asset, computes its SHA-256 hash, and registers it in the manifest.
+
+Example for an Ainsdale Dunes bounding box:
+
+```bash
+dune-pc-download \
+  --bbox "-3.08,53.59,-3.03,53.62" \
+  --date-range 2025-06-01/2025-06-30 \
+  --asset visual \
+  --max-cloud-cover 20 \
+  --output data/raw/sentinel2/ainsdale_visual_2025_06.tif \
+  --manifest data/metadata/manifest.csv \
+  --location-name "Ainsdale Dunes" \
+  --latitude 53.602 \
+  --longitude -3.055 \
+  --stage yellow_dune \
+  --label-source manual_review \
+  --label-confidence 0.7 \
+  --notes "First Planetary Computer Sentinel-2 test image"
+```
+
+Use `--asset visual` for a true-colour image, or a band key such as `B02`, `B03`, `B04`, or `B08` when you want individual spectral bands for vegetation index work.

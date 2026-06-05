@@ -15,6 +15,7 @@ dependencies = [
 
 [project.scripts]
 dune-manifest-add = "dune_ai_monitoring.datasets.cli:main"
+dune-pc-download = "dune_ai_monitoring.datasets.planetary_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
