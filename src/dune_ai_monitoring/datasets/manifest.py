@@ -148,6 +148,15 @@ def write_manifest(path: str | Path, records: Iterable[DatasetRecord]) -> None:
             writer.writerow(record.to_row())
 
 
+def add_record_to_manifest(path: str | Path, record: DatasetRecord) -> None:
+    """Append a record to a manifest, creating the file if needed."""
+
+    manifest_path = Path(path)
+    records = load_manifest(manifest_path) if manifest_path.exists() else []
+    records.append(record)
+    write_manifest(manifest_path, records)
+
+
 def validate_manifest(path: str | Path) -> list[str]:
     """Return validation warnings for records that need provenance or label work."""
 
@@ -210,4 +219,3 @@ def _format_optional_number(value: float | None) -> str:
     if value is None:
         return ""
     return f"{value:g}"
-

@@ -186,6 +186,8 @@ The `src/dune_ai_monitoring/` package contains the first reusable project code:
 
 The first dataset manifest template lives at `data/metadata/example_manifest.csv`, with notes in `docs/dataset_manifest.md`.
 
+After installing the project, use `dune-manifest-add` to add a downloaded image to `data/metadata/manifest.csv` and compute its SHA-256 provenance hash automatically.
+
 ---
 
 ## Planned Experiments

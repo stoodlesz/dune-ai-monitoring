@@ -3,7 +3,14 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from dune_ai_monitoring.datasets import DatasetRecord, compute_sha256, load_manifest, validate_manifest, write_manifest
+from dune_ai_monitoring.datasets import (
+    DatasetRecord,
+    add_record_to_manifest,
+    compute_sha256,
+    load_manifest,
+    validate_manifest,
+    write_manifest,
+)
 
 
 class DatasetManifestTests(unittest.TestCase):
@@ -51,6 +58,22 @@ class DatasetManifestTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             path = Path(tmpdir) / "manifest.csv"
             write_manifest(path, [record])
+
+            loaded = load_manifest(path)
+
+        self.assertEqual(loaded, [record])
+
+    def test_add_record_to_manifest_creates_manifest(self):
+        record = DatasetRecord(
+            image_path="data/raw/sample.tif",
+            source_name="Sentinel-2",
+            source_url="https://dataspace.copernicus.eu/",
+            bands=("B2", "B3", "B4", "B8"),
+        )
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = Path(tmpdir) / "metadata" / "manifest.csv"
+            add_record_to_manifest(path, record)
 
             loaded = load_manifest(path)
 

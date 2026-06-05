@@ -13,6 +13,8 @@ dependencies = [
     "pillow>=10.0",
 ]
 
+[project.scripts]
+dune-manifest-add = "dune_ai_monitoring.datasets.cli:main"
+
 [tool.setuptools.packages.find]
 where = ["src"]
-

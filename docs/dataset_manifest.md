@@ -35,3 +35,27 @@ Current stage labels are:
 
 The `sha256`, `source_url`, `label_source`, and `label_confidence` fields are deliberately part of the first dataset format. They make it possible to detect accidental file changes, track data provenance, and separate high-confidence training labels from experimental or weak labels.
 
+## Adding A Local Image
+
+After installing the project with `pip install -e .`, add a downloaded image to a manifest with:
+
+```bash
+dune-manifest-add \
+  --manifest data/metadata/manifest.csv \
+  --image-path data/raw/sentinel2/ainsdale_2026_05_01.tif \
+  --source-name Sentinel-2 \
+  --source-url https://dataspace.copernicus.eu/ \
+  --capture-date 2026-05-01 \
+  --location-name "Ainsdale Dunes" \
+  --latitude 53.602 \
+  --longitude -3.055 \
+  --sensor MSI \
+  --bands "B2;B3;B4;B8" \
+  --stage yellow_dune \
+  --label-source manual_review \
+  --label-confidence 0.85 \
+  --license "Copernicus terms" \
+  --notes "First local Sentinel-2 test image"
+```
+
+The command computes the file SHA-256 automatically and writes it into the manifest row.

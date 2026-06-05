@@ -3,6 +3,7 @@
 from dune_ai_monitoring.datasets.manifest import (
     MANIFEST_FIELDS,
     DatasetRecord,
+    add_record_to_manifest,
     compute_sha256,
     load_manifest,
     validate_manifest,
@@ -12,9 +13,9 @@ from dune_ai_monitoring.datasets.manifest import (
 __all__ = [
     "MANIFEST_FIELDS",
     "DatasetRecord",
+    "add_record_to_manifest",
     "compute_sha256",
     "load_manifest",
     "validate_manifest",
     "write_manifest",
 ]
-
